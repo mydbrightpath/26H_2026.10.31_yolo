@@ -1,5 +1,5 @@
 """
-图片或图片文件夹的预测示例：每次运行都保存到新的编号目录。
+图片或图片文件夹的预测示例：每次运行都保存到新的编号目录。.
 
 请把本文件和 result_folders.py 放在同一个文件夹。
 在 yolo 环境中运行：python predict_example.py
@@ -7,10 +7,9 @@
 
 from pathlib import Path
 
-from ultralytics import YOLO
-
 from result_folders import make_result_folder
 
+from ultralytics import YOLO
 
 # ==================== 只需要优先修改这些参数 ====================
 
@@ -52,12 +51,12 @@ def main():
         imgsz=IMAGE_SIZE,
         conf=CONFIDENCE,
         device=DEVICE,
-        save=True,        # 保存画有检测框的图片。
-        show=False,       # 不自动弹窗。
-        stream=True,      # 逐步获取结果，避免把整个图片文件夹的结果都存在列表中。
+        save=True,  # 保存画有检测框的图片。
+        show=False,  # 不自动弹窗。
+        stream=True,  # 逐步获取结果，避免把整个图片文件夹的结果都存在列表中。
         project=project,  # 上面生成的绝对父目录。
-        name=run_name,    # 上面生成的 run_0001、run_0002 等。
-        exist_ok=True,   # 允许 YOLO 使用刚刚由工具新建的目录，避免再次自动改名。
+        name=run_name,  # 上面生成的 run_0001、run_0002 等。
+        exist_ok=True,  # 允许 YOLO 使用刚刚由工具新建的目录，避免再次自动改名。
     )
 
     # stream=True 返回生成器，必须遍历，预测和保存才会持续执行。
