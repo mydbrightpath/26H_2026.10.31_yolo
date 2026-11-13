@@ -1,5 +1,6 @@
-from ultralytics import YOLO
 from pathlib import Path
+
+from ultralytics import YOLO
 
 # 加载模型
 model = YOLO("models/mydataset_sample.pt")
@@ -12,7 +13,6 @@ onnx_path = model.export(format="onnx")
 print("ONNX 保存位置：", Path(onnx_path).resolve())
 
 
-
 # # 使用校准数据导出 INT8 量化的 ONNX 模型
 # # 创建 'yolo26n_int8.onnx'
-# model.export(format="onnx", quantize=8, data="coco8.yaml")  
+# model.export(format="onnx", quantize=8, data="coco8.yaml")

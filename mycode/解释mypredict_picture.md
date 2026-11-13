@@ -1,14 +1,15 @@
 # 部分1
+
 这些代码是在**从 YOLO 检测结果中，取出坐标、类别和置信度**。它们混合了 **Ultralytics、PyTorch 和 Python 自带的写法**，并不全属于一个库。
 
 先看来源：
 
-| 写法 | 来自哪里 | 作用 |
-|---|---|---|
-| `.boxes`、`.xyxy`、`.cls`、`.conf`、`.names` | Ultralytics | 访问检测结果 |
-| `.tolist()`、`.item()` | 你当前代码中的 PyTorch 张量 | 把张量中的数据取成普通 Python 数据 |
-| `int()`、`float()` | Python 自带 | 转换数字类型 |
-| `[0]`、`[class_id]` | Python 的索引写法 | 按位置或键取数据 |
+| 写法                                         | 来自哪里                    | 作用                               |
+| -------------------------------------------- | --------------------------- | ---------------------------------- |
+| `.boxes`、`.xyxy`、`.cls`、`.conf`、`.names` | Ultralytics                 | 访问检测结果                       |
+| `.tolist()`、`.item()`                       | 你当前代码中的 PyTorch 张量 | 把张量中的数据取成普通 Python 数据 |
+| `int()`、`float()`                           | Python 自带                 | 转换数字类型                       |
+| `[0]`、`[class_id]`                          | Python 的索引写法           | 按位置或键取数据                   |
 
 下面用一个例子拆开看。
 
@@ -129,7 +130,7 @@ box.conf
 拆开看：
 
 ```python
-number = box.conf.item()     # 取出普通数字，约为 0.92
+number = box.conf.item()  # 取出普通数字，约为 0.92
 confidence = float(number)  # 明确转换为 Python 小数
 ```
 
@@ -146,7 +147,7 @@ confidence = float(box.conf.item())
 ```python
 model.predict(conf=0.25)  # 你设置的筛选门槛
 
-box.conf                 # 某一个保留下来的检测结果的实际分数
+box.conf  # 某一个保留下来的检测结果的实际分数
 ```
 
 两者不是同一个值。
@@ -208,9 +209,8 @@ print("类别名称对照表：", result.names)
 
 我核对了你本地版本的源码：这些结果属性主要定义在 [Ultralytics 的 results.py](D:/AAA_deeplearning_ultralytics/ultralytics-8.4.210/ultralytics/engine/results.py:955) 中。现在先学会读取和使用它们，不需要立刻看懂整个源码文件。
 
-
-
 # 部分2
+
 在 PyTorch 深度学习框架中，`.item()` 是一个非常常用且重要的基础方法。
 
 简单来说：**它用于将一个只包含「单个数值」的 PyTorch 张量（Tensor）提取出来，转换为标准的 Python 数字（如 `int` 或 `float`）。**
@@ -234,17 +234,16 @@ print("类别名称对照表：", result.names)
 import torch
 
 # 假设这是你神经网络训练中计算出来的一个损失值（包含梯度的单值张量）
-loss_tensor = torch.tensor(0.567) 
+loss_tensor = torch.tensor(0.567)
 
-print(loss_tensor)          # 输出: tensor(0.5670) 
-print(type(loss_tensor))    # 输出: <class 'torch.Tensor'>
+print(loss_tensor)  # 输出: tensor(0.5670)
+print(type(loss_tensor))  # 输出: <class 'torch.Tensor'>
 
 # 使用 .item() 提取数值
 loss_value = loss_tensor.item()
 
-print(loss_value)           # 输出: 0.567
-print(type(loss_value))     # 输出: <class 'float'>
-
+print(loss_value)  # 输出: 0.567
+print(type(loss_value))  # 输出: <class 'float'>
 ```
 
 ---
