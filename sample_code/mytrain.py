@@ -2,7 +2,7 @@
 from ultralytics import YOLO
 
 if __name__ == "__main__":
-    model = YOLO(r"mydataset_sample.pt")
+    model = YOLO(r"models\yolo11n.pt")
     #开启训练
     model.train(
         data = r"mydataset_sample.yaml",   #打算训练coco8这个数据集
