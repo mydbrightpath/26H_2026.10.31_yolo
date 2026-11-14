@@ -1,8 +1,8 @@
 from ultralytics import YOLO
 
-model = YOLO(r"mydataset_sample.pt")#模型：我想用yolo11n.pt这个模型预测
+model = YOLO(r"models\gangqiu1.0_yolo11n.pt")#模型：我想用yolo11n.pt这个模型预测
 model.predict(
-    source = r"D:\AAA_deeplearning_ultralytics\make_dataset\images",#预测目标：我想预测ultralytics\assets里的所有图片
+    source = r"datasets\gangqiu\images\val",#预测目标：我想预测ultralytics\assets里的所有图片
     #预测选项：对预测提一些额外的要求
     save = True,#希望预测后保存一下结果
     show = False,#不用立刻直接显示预测结果
@@ -15,6 +15,6 @@ model.predict(
     save_txt = True,#把预测结果保存成txt文件
 
     #修改训练结果保存地点：保存在results/yolo11n这个文件夹里面
-    project = "myresults/predict",
-    name = "yolo11n",
+    project = "predict",
+    name = "mytest_val_gangqiu1.0_yolo11n",
 )
