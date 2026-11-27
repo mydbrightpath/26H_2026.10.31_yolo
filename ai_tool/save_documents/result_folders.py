@@ -1,5 +1,5 @@
 """
-训练、预测共用的结果目录管理工具。
+训练、预测共用的结果目录管理工具。.
 
 本文件只负责创建结果文件夹，不会训练模型，也不会运行预测。
 正常使用时，运行 train_example.py 或 predict_example.py 即可。
@@ -14,7 +14,7 @@ from pathlib import Path
 
 
 def make_result_folder(results_root, mode, model_path, settings=None):
-    """新建一个编号目录，返回可传给 YOLO 的 project、name 和完整保存路径。"""
+    """新建一个编号目录，返回可传给 YOLO 的 project、name 和完整保存路径。."""
     if mode not in ("train", "predict"):
         raise ValueError('mode 只能是 "train"（训练）或 "predict"（预测）。')
 
@@ -74,9 +74,7 @@ def make_result_folder(results_root, mode, model_path, settings=None):
         "结果保存路径": str(save_dir),
         "运行参数": settings or {},
     }
-    (save_dir / "run_info.json").write_text(
-        json.dumps(information, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    (save_dir / "run_info.json").write_text(json.dumps(information, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(f"本次结果保存到：{save_dir}")
     return str(project), run_name, save_dir

@@ -1,5 +1,5 @@
 """
-随机划分 YOLO 数据集，将图片和对应的标签一起复制到 train / val / test。
+随机划分 YOLO 数据集，将图片和对应的标签一起复制到 train / val / test。.
 
 第一次使用，在终端安装进度条工具（不需要 sklearn）：
     python -m pip install tqdm
@@ -14,7 +14,6 @@ import shutil
 from pathlib import Path
 
 from tqdm import tqdm
-
 
 # ==================== 可以修改的参数 ====================
 
@@ -41,9 +40,8 @@ RANDOM_SEED = 42
 # ======================================================
 
 
-def split_dataset(images_dir, labels_dir, output_dir,
-                  train_ratio=0.8, val_ratio=0.1, test_ratio=0.1, seed=42):
-    """复制并划分数据集，返回各子集的图片数量。"""
+def split_dataset(images_dir, labels_dir, output_dir, train_ratio=0.8, val_ratio=0.1, test_ratio=0.1, seed=42):
+    """复制并划分数据集，返回各子集的图片数量。."""
     images_dir = Path(images_dir)
     labels_dir = Path(labels_dir)
     output_dir = Path(output_dir)
@@ -62,8 +60,7 @@ def split_dataset(images_dir, labels_dir, output_dir,
     output_path = output_dir.resolve()
     for folder in (images_dir, labels_dir):
         source_path = folder.resolve()
-        if (output_path == source_path or source_path in output_path.parents
-                or output_path in source_path.parents):
+        if output_path == source_path or source_path in output_path.parents or output_path in source_path.parents:
             raise ValueError("输出文件夹和原始文件夹不能相同，也不能互相包含。")
 
     # 只读取当前目录下的 JPG 图片，不遍历子文件夹；也支持大写 .JPG。
@@ -101,8 +98,7 @@ def split_dataset(images_dir, labels_dir, output_dir,
             raise NotADirectoryError(f"输出位置不是文件夹：{output_dir}")
         if any(output_dir.iterdir()):
             raise FileExistsError(
-                f"输出文件夹不为空：{output_dir}\n"
-                "请改用一个新的输出文件夹，或先自行移走已有内容再运行。"
+                f"输出文件夹不为空：{output_dir}\n请改用一个新的输出文件夹，或先自行移走已有内容再运行。"
             )
 
     # 每一项包含一张图片及其标签，把整对文件一起打乱，防止对应关系被打乱。
@@ -132,7 +128,7 @@ def split_dataset(images_dir, labels_dir, output_dir,
     with tqdm(total=total, desc="复制数据集", unit="对", dynamic_ncols=True) as progress:
         for subset, count in zip(subsets, counts):
             progress.set_description(f"复制 {subset}")
-            for image, label in pairs[start:start + count]:
+            for image, label in pairs[start : start + count]:
                 # copy2 是复制：保留原文件，并尽可能保留修改时间等信息。
                 # 图片和标签使用相同的子集、保留原文件名，标签内容不作修改。
                 shutil.copy2(image, output_dir / "images" / subset / image.name)
@@ -148,6 +144,11 @@ def split_dataset(images_dir, labels_dir, output_dir,
 # 直接运行本文件时，从这里开始；导入本文件时不会自动复制数据。
 if __name__ == "__main__":
     split_dataset(
-        IMAGES_DIR, LABELS_DIR, OUTPUT_DIR,
-        TRAIN_RATIO, VAL_RATIO, TEST_RATIO, RANDOM_SEED,
+        IMAGES_DIR,
+        LABELS_DIR,
+        OUTPUT_DIR,
+        TRAIN_RATIO,
+        VAL_RATIO,
+        TEST_RATIO,
+        RANDOM_SEED,
     )
