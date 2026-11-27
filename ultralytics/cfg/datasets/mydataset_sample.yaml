@@ -2,7 +2,7 @@
 path: datasets\mydataset_sample
 train: images/train
 val: images/val
-test: 
+test:
 
 # Classes
 names:

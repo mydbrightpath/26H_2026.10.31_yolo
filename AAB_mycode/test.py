@@ -1,4 +1,5 @@
 import torch
+
 import ultralytics
 
 print("PyTorch 版本：", torch.__version__)
